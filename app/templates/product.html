@@ -22,78 +22,73 @@
     <title>Projekt programistyczny</title>
 </head>
 <body class="">
-<nav class="">
-    <div class="container">
-        <a class="">Menu</a>
-        <button class="" type="button">
-            <span class="navbar-toggler-icon">buton</span>
-        </button>
-        <div class="" id="navbarSupportedContent">
-            <ul class="">
-                <li class="">
-                    <a href="index.html" class="" aria-current="page">Strona Głowna</a>
-                </li>
-                <li class="">
-                    <a href="extraction.html" class="">Ekstracja Opinii</a>
-                </li>
-                <li class="">
-                    <a href="products_list.html" class="">Lista Produktów</a>
-                </li>
-                <li class="">
-                    <a href="author.html" class="">O Autorze</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<section>
-    <article>
-        <h2>Strona produktu</h2>
+<table id='opinions' class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    title 1
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    title 2
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    title 3
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    title 4
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    t1 d1
+                </th>
+                <td class="px-6 py-4">
+                    t2 d1
+                </td>
+                <td class="px-6 py-4">
+                    t3 d1
+                </td>
+                <td class="px-6 py-4">
+                    t4 d1
+                </td>
+            </tr>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    t1 d2
+                </th>
+                <td class="px-6 py-4">
+                    t2 d2
+                </td>
+                <td class="px-6 py-4">
+                    t3 d2
+                </td>
+                <td class="px-6 py-4">
+                    t4 d2
+                </td>
+            </tr>
+            <tr class="bg-white dark:bg-gray-800">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    t1 d3
+                </th>
+                <td class="px-6 py-4">
+                    t2 d3
+                </td>
+                <td class="px-6 py-4">
+                    t3 d3
+                </td>
+                <td class="px-6 py-4">
+                    t4 d3
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-        <table id="Table" class="">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Opinia</th>
-                <th>Ocena</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1</td>
-                <td>Lorem ipsum dolor sit amet</td>
-                <td>4</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Consectetur adipiscing elit</td>
-                <td>5</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</td>
-                <td>3</td>
-            </tr>
-            </tbody>
-        </table>
-
-        <button id="download" class="">Pobierz opinie</button>
-        <a href="charts.html" class="">Wykresy</a>
-    </article>
-</section>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 <script>
-    $(document).ready(function () {
-
-        $('#Table').DataTable();
-
-
-        $('#exportBtn').click(function () {
-
-        });
-    });
+    $(document).ready( function () {
+        $('#opinions').DataTable();
+    } );
 </script>
 </body>
 </html>
