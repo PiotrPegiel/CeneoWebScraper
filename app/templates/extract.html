@@ -1,18 +1,24 @@
 {% extends 'base.html' %}
 {% block title %}Pobieranie opinii o produkcie{% endblock %}
 {% block content %}
-<form class="w-full max-w-sm">
-    <div class="flex items-center border-b border-teal-500 py-2">
-        <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-               type="text" placeholder="Kod Produktu" aria-label="product_code">
-        <button class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
-                type="button">
-            Pobierz
-        </button>
-        <button class="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-1 px-2 rounded"
-                type="button">
-            Cancel
-        </button>
-    </div>
-</form>
+<div class="text-center text-lg font-semibold text-gray-700 dark:text-white  grid w-screen place-items-center">
+    <form class="w-full max-w-sm" method="post" action="{{url_for('extract')}}">
+        <div class="flex items-center border-b border-teal-500 py-2">
+            <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                   type="text" placeholder="Kod Produktu" aria-label="product_code" name="product_code" required id="product_code">
+            <button type="submit" class="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-primary/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700 dark:before:bg-gray-800 sm:w-max">
+
+                <span class="relative text-base font-semibold text-primary dark:text-white">Pobierz</span>
+            </button>
+            <button class="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-1 px-2 rounded"
+                    type="button">
+                Cancel
+            </button>
+        </div>
+    </form>
+</div>
 {% endblock %}
+
+<a href="#" class="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-primary/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700 dark:before:bg-gray-800 sm:w-max">
+
+                    </a>

@@ -1,68 +1,8 @@
 {% extends 'base.html' %}
 {% block title %}Opinie o produkcie{% endblock %}
 {% block content %}
-<table id='opinions' class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-    <tr>
-        <th scope="col" class="px-6 py-3">
-            title 1
-        </th>
-        <th scope="col" class="px-6 py-3">
-            title 2
-        </th>
-        <th scope="col" class="px-6 py-3">
-            title 3
-        </th>
-        <th scope="col" class="px-6 py-3">
-            title 4
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            t1 d1
-        </th>
-        <td class="px-6 py-4">
-            t2 d1
-        </td>
-        <td class="px-6 py-4">
-            t3 d1
-        </td>
-        <td class="px-6 py-4">
-            t4 d1
-        </td>
-    </tr>
-    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            t1 d2
-        </th>
-        <td class="px-6 py-4">
-            t2 d2
-        </td>
-        <td class="px-6 py-4">
-            t3 d2
-        </td>
-        <td class="px-6 py-4">
-            t4 d2
-        </td>
-    </tr>
-    <tr class="bg-white dark:bg-gray-800">
-        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            t1 d3
-        </th>
-        <td class="px-6 py-4">
-            t2 d3
-        </td>
-        <td class="px-6 py-4">
-            t3 d3
-        </td>
-        <td class="px-6 py-4">
-            t4 d3
-        </td>
-    </tr>
-    </tbody>
-</table>
+<h2 class="text-lg font-semibold text-gray-700 dark:text-white">{{product_code}}</h2>
+{{opinions|safe}}}
 {% endblock %}
 {% block scripts %}
 <script>
