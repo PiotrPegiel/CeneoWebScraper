@@ -2,12 +2,12 @@
 {% block title %}Opinie o produkcie{% endblock %}
 {% block content %}
 <h2 class="text-lg font-semibold text-gray-700 dark:text-white">{{product_code}}</h2>
-{{opinions|safe}}}
+{{opinions|safe}}
 {% endblock %}
 {% block scripts %}
 <script>
-    $(document).ready(function () {
+    $(document).ready( function () {
         $('#opinions').DataTable();
-    });
+    } );
 </script>
 {% endblock %}
