@@ -18,11 +18,13 @@ def extract():
         product_code = request.form.get('product_code')
         url = f"https://www.ceneo.pl/{product_code}#tab=reviews"
         all_opinions =[]
-        while(url):
-            print(url)
+        while url:
             response = requests.get(url)
             page_dom = BeautifulSoup(response.text, "html.parser")
             opinions = page_dom.select("div.js_product-review")
+            if not opinions:
+                error = 'Błędny kod lub nie znaleziono opinii'
+                return render_template('extract.html', error=error)
             for opinion in opinions:
                 single_opinion = {}
                 for key, value in selectors.items():
@@ -44,6 +46,18 @@ def product(product_code):
 
 @app.route('/products')
 def products():
+    all_products = []
+    data_path = f"./app/data/opinions/"
+    file_names = [filename for filename in os.listdir(data_path) if filename.endswith('.json')]
+    for file_name in file_names:
+        # with open(os.path.join(data_path, file_name), encoding='utf-8') as file:
+        #     opinions = json.load(file)
+        #     print(len(opinions))
+        opinions = pd.read_json(os.path.join(data_path, file_name))
+        print(opinions)
+        opinions_count = opinions.shape[0]
+        pros_count = int(opinions.pros.map(bool).sum())
+        print(pros_count)
     return render_template('products.html')
 
 @app.route('/author')
