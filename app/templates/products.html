@@ -1,10 +1,26 @@
 {% extends 'base.html' %}
 {% block title %}Lista produktów{% endblock %}
 {% block content %}
-<ul class="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-    <li class="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">item 1</li>
-    <li class="w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600">item 2</li>
-    <li class="w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600">item 3</li>
-    <li class="w-full px-4 py-2 rounded-b-lg">item 4</li>
-</ul>
+    <div class="text-center text-lg font-semibold text-gray-700 dark:text-white grid w-screen place-items-center space-y-8">
+        {% if list %}
+            {% for item in list %}
+                <div class="bg-teal-700 border border-teal-100 px-4 py-3 rounded relative flex flex-col">
+                    <a href="{{ url_for('product', product_code=item['code']) }}" class="mx-auto">
+                        <span class="text-teal-50">{{ item['name'] }}</span>
+                    </a>
+                    <div class="flex flex-row px-auto space-x-6 mx-auto">
+                        <span class="text-teal-200">Liczba opinii: {{ item['opinions_count'] }}</span>
+                        <span class="text-teal-200">Średnia ocena: {{ item['avg_rating'] }}</span>
+                    </div>
+                    <div class="flex flex-row px-auto space-x-6 mx-auto">
+                        <span class="text-teal-200">Liczba zalet: {{ item['pros_count'] }}</span>
+                        <span class="text-teal-200">Liczba wad: {{ item['cons_count'] }}</span>
+                    </div>
+                    <a href="{{ url_for('download', filename=item['code']+'.json') }}" class="mx-auto relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-primary/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700 dark:before:bg-gray-800 sm:w-max">
+                        <span class="relative text-base font-semibold text-primary dark:text-white">Pobierz JSON</span>
+                    </a>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endblock %}
