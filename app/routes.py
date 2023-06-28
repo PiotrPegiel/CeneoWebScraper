@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, redirect, url_for, send_from_directory, current_app, send_file
+from flask import render_template, request, redirect, url_for, send_from_directory
 import os
 import json
 import requests
@@ -96,7 +96,7 @@ def products():
         all_products.append(product)
     return render_template('products.html', list=all_products)
 
-# Pobieranie wskazanych plików przez products
+# Pobieranie wskazanych plików
 @app.route('/download/<filename>')
 def download(filename):
     return send_from_directory(f'data/opinions', filename, as_attachment=True)
