@@ -1,9 +1,35 @@
 {% extends 'base.html' %}
 {% block title %}O Autorze{% endblock %}
 {% block content %}
-<div class="text-center text-lg font-semibold text-gray-700 dark:text-white  grid w-screen place-items-center">
-<h3>Wykształcenie</h3>
-<h3>Doświadczenie</h3>
-<h3>Zainteresowania</h3>
+    <div class="text-center text-lg font-semibold text-gray-700 dark:text-white grid grid-cols-3 gap-4 w-screen">
+        <div class="text-left">
+            <h3 class="text-lg font-semibold text-gray-700 dark:text-white">Wykształcenie</h3>
+            <p class="mt-2 text-gray-500">
+                Studiuję na Uniwersytecie Ekonomicznym w Krakowie, na kierunku Informatyka Stosowana.<br />
+                Ukończyłem Technikum Energetyczno Elektroniczne im. Tadeusza Kościuszki nr 9 w Krakowie w zawodzie Technik Informatyk
+            </p>
+        </div>
+        <div class="text-left">
+            <h3 class="text-lg font-semibold text-gray-700 dark:text-white">Doświadczenie</h3>
+            <p class="mt-2 text-gray-500">
+                Posiadam certyfikaty:<br />
+                - IC PHP Developer Fundamentals<br />
+                wydany przez: IC3 Digital Literacy Certification<br />
+                - HTML5 Application Development Fundamentals<br />
+                wydany przez: Microsoft
+            </p>
+        </div>
+        <div class="text-left">
+            <h3 class="text-lg font-semibold text-gray-700 dark:text-white">Zainteresowania</h3>
+            <div class="mt-2 text-gray-500">
+                <ul>
+                    <li>Programowanie</li>
+                    <li>Kosmos</li>
+                    <li>Gry Komputerowe</li>
+                    <li>Gry Planszowe</li>
+                    <li>Książki fantasty</li>
+                </ul>
+            </div>
+        </div>
 </div>
 {% endblock %}

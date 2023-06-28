@@ -1,20 +1,33 @@
 {% extends 'base.html' %}
 {% block title %}Opis projektu{% endblock %}
 {% block content %}
+    <div class="text-center text-lg font-semibold text-gray-700 dark:text-white grid grid-cols-4 gap-4 w-screen">
             <div class="text-left">
                 <h3 class="text-lg font-semibold text-gray-700 dark:text-white">Cel Aplikacji:</h3>
-                <p class="mt-2 text-gray-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.</p>
+                <p class="mt-2 text-gray-500">Pobieranie opinii o produktach z serwisu Ceneo.pl i poddawanie ich analizie</p>
             </div>
             <div class="text-left">
                 <h3 class="text-lg font-semibold text-gray-700 dark:text-white">Opis Działania Aplikacji:</h3>
-                <p class="mt-2 text-gray-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.</p>
+                <p class="mt-2 text-gray-500">Dla produktu, którego kod zostanie podany jako parametr, pobrana zostaje jego nazwa oraz wszystkie dostępne opinie o nim. Następnie aplikacja poddaje je analizie i tworzy dla każdego produktu 2 wykresy.</p>
             </div>
             <div class="text-left">
                 <h3 class="text-lg font-semibold text-gray-700 dark:text-white">Zastosowane biblioteki:</h3>
-                <p class="mt-2 text-gray-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.</p>
+                <div class="mt-2 text-gray-500">
+                    <ul>
+                        <li>BeautifoulSoup4</li>
+                        <li>Requests</li>
+                        <li>Json</li>
+                        <li>Os</li>
+                        <li>Pandas</li>
+                        <li>Numpy</li>
+                        <li>Matplotlib</li>
+                        <li>Flask</li>
+                    </ul>
+                </div>
             </div>
             <div class="text-left">
                 <h3 class="text-lg font-semibold text-gray-700 dark:text-white">Zastosowane podejścia:</h3>
-                <p class="mt-2 text-gray-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.</p>
+                <p class="mt-2 text-gray-500">Szkielet aplikacji tworzy Flask z wykorzystaniem szablonu Jinja, znacznie skracającym ilość kodu i czas pracy. Sercem aplikacji są aplikacje Python pobierające opinie i poddające je obróbce. Przy tworzeniu aplikacji wykorzystany został również Python Virtual Environment</p>
             </div>
+    </div>
 {% endblock %}
