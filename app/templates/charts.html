@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}Opis projektu{% endblock %}
 {% block content %}
-    <div class="text-center text-lg font-semibold text-gray-700 dark:text-white grid w-screen place-items-center space-y-8">
-
+    <div class="text-center text-lg font-semibold text-gray-700 dark:text-white w-screen place-items-center space-y-8 flex flex-col">
+        <a href="{{ url_for('product', product_code=product_code) }}" class="mx-auto relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-primary/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700 dark:before:bg-gray-800 sm:w-max">
+                <span class="relative text-base font-semibold text-primary dark:text-white">Wróć do produktu</span>
+        </a>
+        <img src="{{ url_for('static', filename='charts/'+product_code+'_histogram.png') }}">
+        <img src="{{ url_for('static', filename='charts/'+product_code+'_pie.png') }}">
     </div>
 {% endblock %}

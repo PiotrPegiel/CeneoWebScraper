@@ -1,3 +1,6 @@
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt  # !!!! Wymagane do współdziałania matplotlib (plt.savefig()) z flask'iem (musi być na szczycie pliku) !!!!
 from app import app
 from flask import render_template, request, redirect, url_for, send_from_directory
 import os
@@ -7,7 +10,6 @@ import pandas as pd
 from bs4 import BeautifulSoup
 from app.utils import extract_tag, selectors
 import numpy as np
-from matplotlib import pyplot as plt
 
 @app.route('/')
 @app.route('/index')
@@ -63,13 +65,18 @@ def extract():
         plt.close()
 
         # Udział rekomendacji w opiniach
-        recommendations = opinions.recommendation.value_counts(dropna=False).reindex(["Polecam", "Nie Polecam", np.nan])
-        recommendations.plot.pie(
-            label="",
-            autopct="%1.1f%%",
-            labels=["Polecam", "Nie Polecam", "Brak zdania"],
-            colors=["#B2DFDB", "#FFCDD2", "#EEEEEE"]
-        )
+        recommendations = opinions.recommendation.value_counts(dropna=False)
+        # .reindex(["Polecam", "Nie Polecam"])  - powoduje błędy przy edge case
+        recommendations.plot.pie(label="", autopct="%1.1f%%")
+        plt.title("Rekomendacje")
+
+        # recommendations.plot.pie(
+        #     label="",
+        #     autopct="%1.1f%%",
+        #     labels=["Polecam", "Nie Polecam", "Brak zdania"],
+        #     colors=["#B2DFDB", "#FFCDD2", "#EEEEEE"]
+        # ) - niemożliwe do zastosowania bez reindex (edge case problem)
+
         plt.legend(bbox_to_anchor=(0, 0))
         plt.savefig(f"./app/data/charts/{product_code}_pie.png")
         plt.close()
@@ -122,9 +129,9 @@ def products():
 def download(filename):
     return send_from_directory(f'data/opinions', filename, as_attachment=True)
 
-@app.route('/charts')
-def charts():
-    return render_template('charts.html')
+@app.route('/charts/<product_code>')
+def charts(product_code):
+    return render_template('charts.html', product_code=product_code)
 
 @app.route('/author')
 def author():
