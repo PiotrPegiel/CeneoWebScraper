@@ -40,7 +40,7 @@ def extract():
             except TypeError:
                 url = None
         # Zapisywanie opinii do pliku
-        with open(f"./app/data/opinions/{product_code}.json", "w", encoding="UTF-8") as jf:
+        with open(f"./app/static/opinions/{product_code}.json", "w", encoding="UTF-8") as jf:
             json.dump(all_opinions, jf, indent=4, ensure_ascii=False)
 
         # !Analiza danych!
@@ -58,10 +58,10 @@ def extract():
         plt.ylim(0, max(ratings.values) + 1.5)
         # Tworzenie folderu na wykresy
         try:
-            os.mkdir("./app/data/charts")
+            os.mkdir("./app/static/charts")
         except FileExistsError:
             pass
-        plt.savefig(f"./app/data/charts/{product_code}_histogram.png")
+        plt.savefig(f"./app/static/charts/{product_code}_histogram.png")
         plt.close()
 
         # Udział rekomendacji w opiniach
@@ -78,7 +78,7 @@ def extract():
         # ) - niemożliwe do zastosowania bez reindex (edge case problem)
 
         plt.legend(bbox_to_anchor=(0, 0))
-        plt.savefig(f"./app/data/charts/{product_code}_pie.png")
+        plt.savefig(f"./app/static/charts/{product_code}_pie.png")
         plt.close()
 
         # Przejście na stronę produktu
@@ -87,13 +87,13 @@ def extract():
 
 @app.route('/product/<product_code>')
 def product(product_code):
-    opinions = pd.read_json(f"./app/data/opinions/{product_code}.json")
+    opinions = pd.read_json(f"./app/static/opinions/{product_code}.json")
     return render_template('product.html', product_code=product_code, opinions=opinions.to_html(header=1, classes='w-full text-sm text-left', table_id='opinions'))
 
 @app.route('/products')
 def products():
     all_products = []
-    data_path = f"./app/data/opinions/"
+    data_path = f"./app/static/opinions/"
     file_names = [filename for filename in os.listdir(data_path) if filename.endswith('.json')]
     for file_name in file_names:
         file_path = os.path.join(data_path, file_name)
@@ -127,7 +127,7 @@ def products():
 @app.route('/download/<filename>')
 # Pobieranie wskazanych plików opinii
 def download(filename):
-    return send_from_directory(f'data/opinions', filename, as_attachment=True)
+    return send_from_directory(f'static/opinions', filename, as_attachment=True)
 
 @app.route('/charts/<product_code>')
 def charts(product_code):
