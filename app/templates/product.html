@@ -17,7 +17,11 @@
 {% block scripts %}
 <script>
     $(document).ready( function () {
-        $('#opinions').DataTable();
+        $('#opinions').DataTable({
+            responsive: true
+        })
+        .columns.adjust()
+        .responsive.recalc();
     } );
 </script>
 {% endblock %}

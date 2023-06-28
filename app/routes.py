@@ -6,6 +6,8 @@ import requests
 import pandas as pd
 from bs4 import BeautifulSoup
 from app.utils import extract_tag, selectors
+import numpy as np
+from matplotlib import pyplot as plt
 
 @app.route('/')
 @app.route('/index')
@@ -40,18 +42,37 @@ def extract():
             json.dump(all_opinions, jf, indent=4, ensure_ascii=False)
 
         # !Analiza danych!
-        # Odczytanie pliku
-        data_path = f"./app/data/opinions/"
-        file_name = f"{product_code}.json"
-        file_path = os.path.join(data_path, file_name)
-        opinions = pd.read_json(file_path)
+        # Odczytanie danych
+        opinions = pd.read_json(json.dumps(all_opinions,ensure_ascii=False))
         # Zamiana ',' na '.'
         opinions.rating = opinions.rating.map(lambda x: float(x.split("/")[0].replace(",", ".")))
-        # Przypisanie statystyk
-        product = {'name': name, 'path': file_path, 'url': url, 'opinions_count': opinions.shape[0],
-                   'pros_count': opinions.pros.map(bool).sum(), 'cons_count': opinions.cons.map(bool).sum(),
-                   'avg_rating': opinions.rating.mean().round(2)}
 
+        # Histogrm częstości ocen produktu
+        ratings = opinions.rating.value_counts().reindex(list(np.arange(0, 5.5, 0.5)), fill_value=0)
+        ratings.plot.bar(color="#009688")
+        plt.title("Histogram ocen")
+        plt.xlabel("Ocena")
+        plt.ylabel("Liczba opinii")
+        plt.ylim(0, max(ratings.values) + 1.5)
+        # Tworzenie folderu na wykresy
+        try:
+            os.mkdir("./app/data/charts")
+        except FileExistsError:
+            pass
+        plt.savefig(f"./app/data/charts/{product_code}_histogram.png")
+        plt.close()
+
+        # Udział rekomendacji w opiniach
+        recommendations = opinions.recommendation.value_counts(dropna=False).reindex(["Polecam", "Nie Polecam", np.nan])
+        recommendations.plot.pie(
+            label="",
+            autopct="%1.1f%%",
+            labels=["Polecam", "Nie Polecam", "Brak zdania"],
+            colors=["#B2DFDB", "#FFCDD2", "#EEEEEE"]
+        )
+        plt.legend(bbox_to_anchor=(0, 0))
+        plt.savefig(f"./app/data/charts/{product_code}_pie.png")
+        plt.close()
 
         # Przejście na stronę produktu
         return redirect(url_for('product', product_code=product_code))
@@ -60,7 +81,7 @@ def extract():
 @app.route('/product/<product_code>')
 def product(product_code):
     opinions = pd.read_json(f"./app/data/opinions/{product_code}.json")
-    return render_template('product.html', product_code=product_code, opinions=opinions.to_html(header=1, classes='w-full text-sm text-left text-gray-500 dark:text-gray-400', table_id='opinions'))
+    return render_template('product.html', product_code=product_code, opinions=opinions.to_html(header=1, classes='w-full text-sm text-left', table_id='opinions'))
 
 @app.route('/products')
 def products():
@@ -96,10 +117,14 @@ def products():
         all_products.append(product)
     return render_template('products.html', list=all_products)
 
-# Pobieranie wskazanych plików
 @app.route('/download/<filename>')
+# Pobieranie wskazanych plików opinii
 def download(filename):
     return send_from_directory(f'data/opinions', filename, as_attachment=True)
+
+@app.route('/charts')
+def charts():
+    return render_template('charts.html')
 
 @app.route('/author')
 def author():
